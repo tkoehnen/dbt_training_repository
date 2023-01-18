@@ -8,4 +8,4 @@ with orders as (
     from raw.jaffle_shop.orders
 )
 
-select * from orders;
+select * from orders
