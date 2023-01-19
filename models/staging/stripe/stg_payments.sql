@@ -1,3 +1,5 @@
+--{{ config(materialized='view') }}
+
 select 
     id as row_id,
     orderid as order_id,

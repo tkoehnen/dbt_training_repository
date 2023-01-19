@@ -4,6 +4,7 @@ with customers as (
 
 orders as (
     select * from {{ ref('fct_orders') }}
+    --where status <> 'returned'
 ),
 
 customer_order_summary as (
@@ -25,7 +26,6 @@ final as (
         customers.last_name,
         customer_order_summary.first_order_date,
         customer_order_summary.most_recent_order_date,
-        --customer_order_summary.number_of_orders,
         coalesce(customer_order_summary.number_of_orders, 0) as number_of_orders,
         ifnull(customer_order_summary.lifetime_value, 0) as lifetime_value
     from customers
