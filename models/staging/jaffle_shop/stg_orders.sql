@@ -1,9 +1,20 @@
 --{{ config(materialized='view') }}
 
-select
-    id as order_id,
-    user_id as customer_id,
-    order_date,
-    status
+with source as (
+    
+    select * from {{ source('jaffle_shop', 'orders') }}
 
-from raw.jaffle_shop.orders
+),
+
+staged as (
+
+    select
+        id as order_id,
+        user_id as customer_id,
+        order_date,
+        status as order_status
+    from source
+
+)
+
+select * from staged

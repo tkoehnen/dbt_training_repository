@@ -4,7 +4,7 @@ with customers as (
 
 orders as (
     select * from {{ ref('fct_orders') }}
-    --where status <> 'returned'
+    --where order_status <> 'returned'
 ),
 
 customer_order_summary as (

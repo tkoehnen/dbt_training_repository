@@ -4,13 +4,13 @@ with orders as (
 
 payments as (
     select * from {{ ref('stg_payments') }}
-    where status = 'success'
+    --where payment_status = 'success'
 ),
 
 order_payments as (
     select
         order_id,
-        sum(case when status = 'success' then amount end) as amount
+        sum(case when payment_status = 'success' then amount end) as amount
     from payments
     group by 1
 ),
@@ -20,9 +20,15 @@ final as (
         orders.order_id,
         orders.customer_id,
         orders.order_date,
-        orders.status,
-        --sum(ifnull(payments.amount, 0)) as amount
-        coalesce(order_payments.amount, 0) as amount
+        orders.order_status,
+        coalesce(order_payments.amount, 0) as amount,
+        --custom columns
+        case when orders.order_status in ('returned', 'pending_return') then coalesce(-order_payments.amount, 0)
+            else 0 
+            end as amount_returned,
+        case when orders.order_status in ('returned', 'pending_return') then 0
+            else coalesce(order_payments.amount, 0)
+            end as amount_less_returns
 
     from  orders
       left join order_payments using (order_id)
