@@ -2,10 +2,27 @@ version: 2
 
 sources:
   - name: stripe
+    description: a clone of stripe payment database records
     database: raw
     schema: stripe
     tables:
       - name: payment
+        description: the raw payment data
+        columns:
+          - name: id
+            description: primary key for raw payment data
+            tests:
+              - unique
+              - not_null
+          - name: orderid
+            description: foreign key for raw order
+            tests:
+              - not_null
+          - name: status
+            description: status of the raw payment attempt
+            tests:
+              - not_null
+        
         loaded_at_field: _etl_loaded_at
         freshness:
           warn_after: {count: 12, period: hour}

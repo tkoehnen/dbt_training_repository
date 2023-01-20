@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_payments
+    description: one record per payment attempt
+    columns:
+      - name: payment_id
+        description: primary key for stg_payments
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Foreign key to stg_orders.order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: payment_status
+        description: '{{ doc("payment_status_doc") }}'
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - success
+                - fail
