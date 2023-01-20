@@ -37,5 +37,4 @@ final as (
 )
 
 select * from final
-    order by order_id asc
-        --, customer_id asc
+    --order by order_id asc
