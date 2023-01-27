@@ -11,7 +11,6 @@ vars:
   # `dbt_utils.surrogate_key` macro that has been replaced by `dbt_utils.generate_surrogate_key` macro.
   surrogate_key_treat_nulls_as_empty_strings: True
 
-
 # This setting configures which "profile" dbt uses for this project.
 profile: 'default'
 
