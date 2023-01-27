@@ -13,4 +13,4 @@ staged as (
 )
 select * from staged
 
-{{ limit_data_in_dev(column_name = 'order_date', dev_days_of_data=2000) }}
+--{{ limit_data_in_dev(column_name = 'order_date', dev_days_of_data=2000) }}
