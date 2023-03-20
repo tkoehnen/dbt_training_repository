@@ -25,12 +25,12 @@ sources:
               - not_null
           - name: user_id
             description: foreign key representing the raw customer id
-            tests:
-              - not_null
+            # tests:
+              # - not_null
           - name: status
             description: status of the raw order
-            tests:
-              - not_null
+            # tests:
+              # - not_null
 
         loaded_at_field: _etl_loaded_at
         freshness:

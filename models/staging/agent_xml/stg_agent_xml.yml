@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_agent_xml
+    description: one record per Job Id
+    columns:
+      - name: xmldata
+        description: consolidated XML code per OBIEE Agent Job
+        tests:
+          - unique
+          - not_null
+  
+  - name: stg_agent_xml_job
+    description: one record per Job Id
+    columns:
+      - name: job_id
+        description: primary key for stg_agent_xml
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_agent_xml_rcp
+    description: 0 to N receipient records per job_id
+    columns:
+      - name: job_id
+        description: foreign key for joing to stg_agent_xml_job
+        tests:
+          - not_null
+
+  - name: stg_agent_xml_email
+    description: 0 to N email receipient records per job_id
+    columns:
+      - name: job_id
+        description: foreign key for joing to stg_agent_xml_job
+        tests:
+          - not_null
+
+  - name: stg_agent_xml_dlv
+    description: 0 to N email delivery destination records per job_id
+    columns:
+      - name: job_id
+        description: foreign key for joing to stg_agent_xml_job
+        tests:
+          - not_null

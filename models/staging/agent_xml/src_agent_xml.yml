@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: agent_xml
+    description: source xml for OBIEE Agent files
+    database: test_db
+    schema: public
+    tables:
+      - name: xml_agent_test_table
+        description: table with single column reprenting the OBIEE Agent XML for individual JOB_ID values
+        columns:
+          - name: xmldata
+            description: column for raw xml code per job_id
+            tests:
+              - unique
+              - not_null
+
+      - name: xml_agent_test_job_t
+        description: unique jobs table
+
+      - name: xml_agent_test_dlv_t
+        description: job delivery destination values
+
+      - name: xml_agent_test_rcp_t
+        description: job recipient values
+
+      - name: xml_agent_test_email_t
+        description: job email recipient values

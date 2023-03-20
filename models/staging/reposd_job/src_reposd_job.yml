@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: reposd_job
+    description: Oracle reposd data for Agent Job
+    database: test_db
+    schema: public
+    tables:
+      - name: agent_job_param_reposd_table
+        description: the raw reposd data for Agent Job loaded from spreadsheet to Snowflake
+        columns:
+          - name: job_id
+            description: primary key for raw job data
+            tests:
+              - unique
+              - not_null
